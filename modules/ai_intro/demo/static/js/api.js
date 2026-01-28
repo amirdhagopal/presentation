@@ -86,7 +86,7 @@ function streamSSE(url, outputEl, options = {}) {
                 outputEl.innerHTML += `<span class="answer">✅ ${answer}</span>\n`;
             } else {
                 fullText += data;
-                outputEl.textContent = fullText;
+                outputEl.insertAdjacentText('beforeend', data);
             }
 
             // Auto-scroll

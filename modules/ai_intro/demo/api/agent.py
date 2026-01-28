@@ -97,12 +97,16 @@ async def agent_run(query: str = Query(...)):
                 # Extract thought
                 thought_match = re.search(r'Thought:\s*(.+?)(?=Action:|Final Answer:|$)', content, re.DOTALL)
                 if thought_match:
-                    yield f"data: [THOUGHT] {thought_match.group(1).strip()}\n\n"
+                    thought_text = thought_match.group(1).strip()
+                    for line in thought_text.splitlines():
+                        yield f"data: [THOUGHT] {line}\n\n"
                 
                 # Check for final answer
                 final_match = re.search(r'Final Answer:\s*(.+)', content, re.DOTALL)
                 if final_match:
-                    yield f"data: [ANSWER] {final_match.group(1).strip()}\n\n"
+                    answer_text = final_match.group(1).strip()
+                    for line in answer_text.splitlines():
+                        yield f"data: [ANSWER] {line}\n\n"
                     yield "data: [DONE]\n\n"
                     return
                 
@@ -121,7 +125,9 @@ async def agent_run(query: str = Query(...)):
                             observation = TOOLS[action]["fn"]()
                         else:
                             observation = TOOLS[action]["fn"](action_input)
-                        yield f"data: [OBSERVATION] {observation}\n\n"
+                        
+                        for line in str(observation).splitlines():
+                            yield f"data: [OBSERVATION] {line}\n\n"
                         
                         messages.append({"role": "assistant", "content": content})
                         messages.append({"role": "user", "content": f"Observation: {observation}"})
@@ -134,6 +140,7 @@ async def agent_run(query: str = Query(...)):
             
             yield "data: [DONE]\n\n"
         except Exception as e:
-            yield f"data: [ERROR] {str(e)}\n\n"
+            for line in str(e).splitlines():
+                yield f"data: [ERROR] {line}\n\n"
     
     return StreamingResponse(stream(), media_type="text/event-stream")

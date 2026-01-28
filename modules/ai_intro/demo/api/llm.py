@@ -30,10 +30,11 @@ async def llm_generate(
                 stream=True,
                 options={"temperature": temperature}
             ):
-                yield f"data: {chunk['response']}\n\n"
+                response = chunk['response']
+                yield f"data: {response.replace('\n', '\ndata: ')}\n\n"
             yield "data: [DONE]\n\n"
         except Exception as e:
-            yield f"data: [ERROR] {str(e)}\n\n"
+            yield f"data: [ERROR] {str(e).replace('\n', ' ')}\n\n"
     
     return StreamingResponse(stream(), media_type="text/event-stream")
 
@@ -55,9 +56,10 @@ async def llm_chat(
             ]
             for chunk in ollama.chat(model=llm_model, messages=messages, stream=True):
                 if 'message' in chunk and 'content' in chunk['message']:
-                    yield f"data: {chunk['message']['content']}\n\n"
+                    content = chunk['message']['content']
+                    yield f"data: {content.replace('\n', '\ndata: ')}\n\n"
             yield "data: [DONE]\n\n"
         except Exception as e:
-            yield f"data: [ERROR] {str(e)}\n\n"
+            yield f"data: [ERROR] {str(e).replace('\n', ' ')}\n\n"
     
     return StreamingResponse(stream(), media_type="text/event-stream")

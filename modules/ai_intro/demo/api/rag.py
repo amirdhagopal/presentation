@@ -80,10 +80,11 @@ Question: {question}
 Answer:"""
             
             for chunk in ollama.generate(model=llm_model, prompt=prompt, stream=True, options={"temperature": 0.3}):
-                yield f"data: {chunk['response']}\n\n"
+                response = chunk['response']
+                yield f"data: {response.replace('\n', '\ndata: ')}\n\n"
             
             yield "data: [DONE]\n\n"
         except Exception as e:
-            yield f"data: [ERROR] {str(e)}\n\n"
+            yield f"data: [ERROR] {str(e).replace('\n', ' ')}\n\n"
     
     return StreamingResponse(stream(), media_type="text/event-stream")
