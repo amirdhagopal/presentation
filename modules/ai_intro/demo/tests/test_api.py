@@ -1,25 +1,27 @@
 #!/usr/bin/env python3
 """
-Tests for AI Concepts Demo API
-==============================
+Tests for AI Intro Demo API
+===========================
 Basic test suite for the demo API endpoints.
+
+Run from module directory:
+    python -m pytest tests/test_api.py -v
+
+Or from project root:
+    python -m pytest modules/ai_intro/demo/tests/test_api.py -v
 """
 
 import math
 import pytest
-import sys
-from pathlib import Path
+import numpy as np
 
-# Add parent to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from modules.ai_intro.demo.api import (
+# Import from parent directory (demo)
+from ..api import (
     safe_eval,
     cosine_similarity,
     SAFE_FUNCTIONS,
     SAFE_CONSTANTS,
 )
-import numpy as np
 
 
 class TestSafeEval:
@@ -103,7 +105,3 @@ class TestCosineSimilarity:
         b = np.array([1, 2, 3])
         assert cosine_similarity(a, b) == 0.0
         assert cosine_similarity(b, a) == 0.0
-
-
-if __name__ == "__main__":
-    pytest.main([__file__, "-v"])
