@@ -1,123 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentations</title>
+    <title>Presentation Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.2);
+            --border: #334155;
+            --tag-tech-bg: #1e3a8a;
+            --tag-tech-text: #60a5fa;
+            --tag-level-bg: #14532d;
+            --tag-level-text: #4ade80;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
             min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #fff;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 60px 20px;
+            line-height: 1.6;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
         }
-        
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            width: 100%;
+            flex: 1;
+        }
+
+        header {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
         h1 {
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .subtitle {
-            color: #8892b0;
-            font-size: 1.2rem;
-            margin-bottom: 60px;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 400;
         }
-        
-        .modules {
+
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            width: 100%;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
-        
-        .module-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 30px;
+            padding: 32px;
             text-decoration: none;
-            color: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, var(--accent-glow), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .icon {
+            font-size: 2rem;
+        }
+
+        .arrow {
+            color: var(--accent);
+            opacity: 0;
+            transform: translateX(-10px);
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        .module-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #e94560;
-            box-shadow: 0 20px 40px rgba(233, 69, 96, 0.2);
-        }
-        
-        .module-card h2 {
             font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #fff;
         }
-        
-        .module-card p {
-            color: #8892b0;
-            line-height: 1.6;
+
+        .card:hover .arrow {
+            opacity: 1;
+            transform: translateX(0);
         }
-        
-        .module-card .arrow {
-            display: inline-block;
-            margin-top: 20px;
-            color: #e94560;
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
         }
-        
-        .module-card:hover .arrow {
-            transform: translateX(10px);
+
+        p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
         }
-        
-        footer {
+
+        .tags {
+            display: flex;
+            gap: 12px;
             margin-top: auto;
-            padding-top: 60px;
-            color: #8892b0;
-            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tag-audience {
+            background-color: var(--tag-tech-bg);
+            color: var(--tag-tech-text);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+        }
+
+        .tag-level {
+            background-color: var(--tag-level-bg);
+            color: var(--tag-level-text);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
         }
     </style>
 </head>
+
 <body>
-    <h1>Presentations</h1>
-    <p class="subtitle">Technical talks and demos</p>
-    
-    <div class="modules">
-        <a href="modules/ai_intro/slides/" class="module-card">
-            <h2>🤖 AI Introduction</h2>
-            <p>Understanding LLMs, embeddings, RAG, and AI agents with hands-on Ollama demos.</p>
-            <span class="arrow">→</span>
-        </a>
-        
-        <!-- Add more modules here as you create them -->
-        <!--
-        <a href="modules/next_module/slides/" class="module-card">
-            <h2>📦 Next Module</h2>
-            <p>Description of the next module...</p>
-            <span class="arrow">→</span>
-        </a>
-        -->
+    <div class="container">
+        <header>
+            <h1>Presentations</h1>
+            <p class="subtitle">A collection of technical deep dives and interactive demos</p>
+        </header>
+
+        <div class="grid">
+            <a href="modules/ai_intro/slides/" class="card">
+                <div class="card-content">
+                    <div class="card-header">
+                        <span class="icon">🤖</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <h2>AI Introduction</h2>
+                    <p>A comprehensive overview of Large Language Models, embeddings, RAG, and AI agents. Includes
+                        interactive demos powered by Ollama.</p>
+
+                    <div class="tags">
+                        <span class="tag tag-audience">Target: Technical</span>
+                        <span class="tag tag-level">Level: Beginner</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Placeholder for future modules -->
+            <!--
+            <a href="#" class="card" style="opacity: 0.5;">
+                <div class="card-content">
+                    <div class="card-header">
+                        <span class="icon">🚧</span>
+                    </div>
+                    <h2>Coming Soon</h2>
+                    <p>More exciting topics are in development.</p>
+                </div>
+            </a>
+            -->
+        </div>
     </div>
-    
+
     <footer>
-        © 2026 Amirdha Gopal Rajendran
+        © 2026 Amirdha Gopal Rajendran • Built with ❤️
     </footer>
 </body>
+
 </html>
