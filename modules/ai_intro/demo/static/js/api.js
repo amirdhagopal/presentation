@@ -12,7 +12,13 @@ async function checkHealth() {
     const banner = document.getElementById('setup-banner');
 
     try {
-        const response = await fetch(`${API_BASE}/api/health`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 second timeout
+
+        const response = await fetch(`${API_BASE}/api/health`, {
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
         const data = await response.json();
 
         if (data.status === 'ok') {
