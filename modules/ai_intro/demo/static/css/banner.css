@@ -1,0 +1,76 @@
+/* =============================================================================
+   Setup Banner
+   ============================================================================= */
+
+.setup-banner {
+    background: linear-gradient(135deg, #92400e 0%, #78350f 100%);
+    border-bottom: 2px solid #fbbf24;
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.banner-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.banner-icon {
+    font-size: 1.5rem;
+    background: rgba(251, 191, 36, 0.2);
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.banner-text {
+    flex: 1;
+    font-size: 1rem;
+    color: #fef3c7;
+    line-height: 1.5;
+}
+
+.banner-text strong {
+    color: #fcd34d;
+    font-size: 1.1rem;
+}
+
+.banner-text code {
+    background: rgba(251, 191, 36, 0.25);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    color: #fde68a;
+    border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+.banner-text a {
+    color: #fcd34d;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.banner-text a:hover {
+    color: #fef3c7;
+}
+
+.banner-close {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    color: #fef3c7;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.banner-close:hover {
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+}

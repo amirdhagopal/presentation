@@ -15,7 +15,7 @@ import math
 import pytest
 import numpy as np
 
-# Import from parent directory (demo)
+# Import from api package
 from ..api import (
     safe_eval,
     cosine_similarity,
