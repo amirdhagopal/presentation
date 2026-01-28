@@ -10,25 +10,12 @@ import { initRAG } from './rag.js';
 import { initAgent } from './agent.js';
 import { initSettings } from './settings.js';
 
-/**
- * Initialize the setup banner close button
- */
-function initBanner() {
-    const closeBtn = document.getElementById('banner-close-btn');
-    const banner = document.getElementById('setup-banner');
 
-    if (closeBtn && banner) {
-        closeBtn.addEventListener('click', () => {
-            banner.style.display = 'none';
-        });
-    }
-}
 
 /**
  * Initialize the application
  */
 document.addEventListener('DOMContentLoaded', () => {
-    initBanner();
     initTabs();
     initSubTabs();
     initLLM();

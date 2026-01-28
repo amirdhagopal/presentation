@@ -58,19 +58,3 @@
 .banner-text a:hover {
     color: #fef3c7;
 }
-
-.banner-close {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(251, 191, 36, 0.3);
-    color: #fef3c7;
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 6px 10px;
-    border-radius: 6px;
-    transition: all 0.2s;
-}
-
-.banner-close:hover {
-    background: rgba(0, 0, 0, 0.4);
-    color: #fff;
-}

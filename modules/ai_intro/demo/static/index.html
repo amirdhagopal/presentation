@@ -15,16 +15,14 @@
 </head>
 
 <body>
-    <!-- Local Setup Banner -->
-    <div class="setup-banner" id="setup-banner">
+    <!-- Error Banner (Hidden by default) -->
+    <div class="setup-banner hidden" id="setup-banner">
         <div class="banner-content">
             <span class="banner-icon">⚠️</span>
             <div class="banner-text">
-                <strong>This demo requires local setup!</strong><br>
-                Run <code>python run.py</code> in the project folder (requires <a href="https://ollama.com"
-                    target="_blank">Ollama</a>)
+                <strong>Connection Failed!</strong><br>
+                Please run <code>ollama serve</code> and restart the backend with <code>python run.py</code>.
             </div>
-            <button class="banner-close" id="banner-close-btn" aria-label="Close banner">✕</button>
         </div>
     </div>
 

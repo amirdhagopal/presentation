@@ -9,6 +9,8 @@ import { API_BASE } from './config.js';
  */
 async function checkHealth() {
     const status = document.getElementById('status');
+    const banner = document.getElementById('setup-banner');
+
     try {
         const response = await fetch(`${API_BASE}/api/health`);
         const data = await response.json();
@@ -17,6 +19,7 @@ async function checkHealth() {
             status.classList.add('connected');
             status.classList.remove('error');
             status.querySelector('.status-text').textContent = 'Connected';
+            if (banner) banner.classList.add('hidden');
         } else {
             throw new Error(data.message);
         }
@@ -25,6 +28,7 @@ async function checkHealth() {
         status.classList.remove('connected');
         status.querySelector('.status-text').textContent = 'Disconnected';
         console.error('Health check failed:', error);
+        if (banner) banner.classList.remove('hidden');
     }
 }
 
