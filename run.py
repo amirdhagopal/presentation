@@ -47,12 +47,28 @@ def create_app(module_name: str) -> FastAPI:
     except Exception as e:
         print(f"Error loading API module: {e}")
 
+    # Print Access URLs
+    print("\n" + "="*50)
+    print(f"🚀 {module_name.capitalize()} Presentation Running")
+    print("="*50)
+    if slides_path.exists():
+        print(f"📝 Slides: http://localhost:8001/slides/index.html")
+    if demo_static_path.exists():
+        print(f"🎮 Demo:   http://localhost:8001/demo")
+    print(f"🔌 API:    http://localhost:8001/docs")
+    print("="*50 + "\n")
+
     # 4. Root Redirect
     @app.get("/")
     async def root():
         if slides_path.exists():
             return RedirectResponse(url="/slides/index.html")
         return {"message": f"Welcome to {module_name} presentation"}
+
+    # 5. Demo Redirect (convenience)
+    @app.get("/demo")
+    async def demo_redirect():
+        return RedirectResponse(url="/static/index.html")
 
     return app
 
