@@ -2,6 +2,76 @@
    AI Concepts Demo - Styles
    ============================================================================= */
 
+/* =============================================================================
+   Setup Banner
+   ============================================================================= */
+
+.setup-banner {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f2942 100%);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+    padding: 12px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.banner-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.banner-icon {
+    font-size: 1.2rem;
+}
+
+.banner-text {
+    flex: 1;
+    font-size: 0.9rem;
+    color: #e0e7ff;
+}
+
+.banner-text strong {
+    color: #fff;
+}
+
+.banner-text code {
+    background: rgba(99, 102, 241, 0.3);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: #a5b4fc;
+}
+
+.banner-text a {
+    color: #818cf8;
+    text-decoration: none;
+}
+
+.banner-text a:hover {
+    text-decoration: underline;
+}
+
+.banner-close {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.banner-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+
 :root {
     /* Colors - Dark Theme */
     --bg-primary: #0a0a0f;
