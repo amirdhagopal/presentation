@@ -497,7 +497,19 @@ function initSettings() {
 // Initialize
 // =============================================================================
 
+function initBanner() {
+    const closeBtn = document.getElementById('banner-close-btn');
+    const banner = document.getElementById('setup-banner');
+
+    if (closeBtn && banner) {
+        closeBtn.addEventListener('click', () => {
+            banner.style.display = 'none';
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    initBanner();
     initTabs();
     initSubTabs();
     initLLM();
