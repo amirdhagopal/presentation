@@ -1,0 +1,33 @@
+# AI Concepts Knowledge Base
+
+## Large Language Models (LLMs)
+
+Large Language Models are deep neural networks trained on massive amounts of text data. They use the Transformer architecture with self-attention mechanisms to understand context and relationships between words. The core training objective is next token prediction - predicting the most likely next word given the previous context. Examples include GPT-4, Claude, Gemini, Llama, and Mistral.
+
+LLMs have a context window limitation, meaning they can only process a certain amount of text at once. Modern models support context windows from 4K to 128K tokens. This limitation means LLMs cannot read entire codebases at once, don't remember previous conversations, have no access to real-time information, and cannot access private documents without additional tooling.
+
+## Retrieval-Augmented Generation (RAG)
+
+RAG is a technique that connects LLMs to external knowledge sources, allowing them to access information beyond their training data in real-time. The RAG pipeline consists of five steps: Query (user asks a question), Embed (convert query to vector), Retrieve (search vector database), Augment (add retrieved context to prompt), and Generate (LLM produces response).
+
+Embeddings are numerical vector representations of text that capture semantic meaning. Similar concepts have similar vectors. Vector databases like Pinecone, Weaviate, Chroma, and pgvector are specialized for storing and querying embeddings. RAG is commonly used for enterprise knowledge bases, documentation chatbots, customer support, and research assistants.
+
+## AI Agents
+
+An AI Agent combines an LLM with reasoning capabilities, tool use, and memory. The formula is: LLM + Reasoning + Tools + Memory = Agent. Agents are goal-directed, breaking complex tasks into steps. They use the ReAct pattern: Reason (think about what to do), Act (execute a tool or action), Observe (see the result), and Repeat until the goal is achieved.
+
+Agents can call external APIs, execute code, browse the web, and interact with databases. They maintain both short-term memory (conversation context) and long-term memory (persistent storage). Examples of real-world agents include GitHub Copilot, Devin, AutoGPT, and Claude Computer Use.
+
+## Model Context Protocol (MCP)
+
+MCP is an open standard providing a universal way for AI models to connect with external tools, data sources, and services. It's often called "USB-C for AI" because it standardizes connections like USB-C standardized device ports.
+
+Before MCP, every AI integration required custom-built APIs, plugins, SDKs, or webhooks. With MCP, there's one standard protocol for infinite connections. The architecture has three layers: Hosts (Claude Desktop, VS Code, custom apps), MCP Clients (maintain connections), and MCP Servers (expose Tools, Resources, and Prompts).
+
+Tools are functions the AI can call (run SQL, send email). Resources are data the AI can read (files, database records). Prompts are pre-defined templates for common tasks.
+
+## The Complete AI Architecture
+
+In a modern AI system, these components work together: The Agent receives user requests and orchestrates the flow. It uses the LLM as the "brain" for understanding and generating language. RAG acts as "memory," retrieving relevant knowledge when needed. MCP serves as the "nervous system," providing standard protocols to connect to databases, APIs, files, and services.
+
+For example, when a user asks to "analyze last quarter's sales and create a report": (1) The Agent receives the request and plans steps, (2) MCP connects to the sales database, (3) RAG retrieves product documentation, (4) The LLM analyzes data and generates the report.

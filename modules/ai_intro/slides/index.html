@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Modern AI Stack | LLMs, RAG, Agents & MCP</title>
+    <meta name="description"
+        content="An interactive presentation explaining core AI concepts: Large Language Models, Retrieval-Augmented Generation, AI Agents, and Model Context Protocol">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">8</span>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <main class="presentation">
+
+        <!-- Slide 1: Introduction -->
+        <section class="slide active" id="slide-1">
+            <div class="slide-content intro-slide">
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                    <div class="shape shape-4"></div>
+                </div>
+                <div class="intro-text">
+                    <span class="overline animate-in">Understanding the Future of AI</span>
+                    <h1 class="main-title animate-in delay-1">The Modern AI Stack</h1>
+                    <p class="subtitle animate-in delay-2">LLMs • RAG • Agents • MCP</p>
+                    <div class="intro-visual animate-in delay-3">
+                        <svg class="connection-diagram" viewBox="0 0 400 100" fill="none">
+                            <circle cx="50" cy="50" r="25" class="node node-1" />
+                            <circle cx="150" cy="50" r="25" class="node node-2" />
+                            <circle cx="250" cy="50" r="25" class="node node-3" />
+                            <circle cx="350" cy="50" r="25" class="node node-4" />
+                            <line x1="75" y1="50" x2="125" y2="50" class="connection" />
+                            <line x1="175" y1="50" x2="225" y2="50" class="connection" />
+                            <line x1="275" y1="50" x2="325" y2="50" class="connection" />
+                            <text x="50" y="55" class="node-label">LLM</text>
+                            <text x="150" y="55" class="node-label">RAG</text>
+                            <text x="250" y="55" class="node-label">Agent</text>
+                            <text x="350" y="55" class="node-label">MCP</text>
+                        </svg>
+                    </div>
+                    <p class="hint animate-in delay-4">Press <kbd>→</kbd> or <kbd>Space</kbd> to begin</p>
+                    <p class="author animate-in delay-5">by Amirdha Gopal Rajendran</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: What is an LLM? -->
+        <section class="slide" id="slide-2">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">01</span>
+                    <h2 class="slide-title animate-in">What is an LLM?</h2>
+                    <p class="slide-subtitle animate-in delay-1">Large Language Model — The Foundation</p>
+                </div>
+
+                <div class="content-grid">
+                    <div class="content-card animate-in delay-2">
+                        <div class="card-icon">🧠</div>
+                        <h3>Neural Network at Scale</h3>
+                        <p>A Large Language Model is a deep neural network trained on <strong>massive amounts of text
+                                data</strong> (billions to trillions of tokens) to understand and generate human
+                            language.</p>
+                    </div>
+
+                    <div class="content-card animate-in delay-3">
+                        <div class="card-icon">⚡</div>
+                        <h3>Transformer Architecture</h3>
+                        <p>Built on the <strong>attention mechanism</strong> — the model learns which parts of the input
+                            to focus on, enabling understanding of context and relationships between words.</p>
+                    </div>
+
+                    <div class="content-card animate-in delay-4">
+                        <div class="card-icon">🎯</div>
+                        <h3>Next Token Prediction</h3>
+                        <p>At its core, an LLM predicts the <strong>next most likely token</strong>. This simple
+                            objective, at scale, leads to emergent capabilities like reasoning, coding, and creativity.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="diagram-section animate-in delay-5">
+                    <div class="llm-diagram">
+                        <div class="diagram-flow">
+                            <div class="flow-item input">
+                                <span class="flow-label">Input</span>
+                                <div class="flow-box">"The capital of France is"</div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-item transformer">
+                                <span class="flow-label">Transformer</span>
+                                <div class="flow-box transformer-box">
+                                    <div class="layer">Attention</div>
+                                    <div class="layer">FFN</div>
+                                    <div class="layer">× N layers</div>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-item output">
+                                <span class="flow-label">Output</span>
+                                <div class="flow-box highlight">"Paris"</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="examples-row animate-in delay-6">
+                    <span class="example-label">Examples:</span>
+                    <span class="example-tag">GPT-4</span>
+                    <span class="example-tag">Claude</span>
+                    <span class="example-tag">Gemini</span>
+                    <span class="example-tag">Llama</span>
+                    <span class="example-tag">Mistral</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: The Context Window Challenge -->
+        <section class="slide" id="slide-3">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">02</span>
+                    <h2 class="slide-title animate-in">The Context Window</h2>
+                    <p class="slide-subtitle animate-in delay-1">Understanding LLM Limitations</p>
+                </div>
+
+                <div class="split-content">
+                    <div class="split-left">
+                        <div class="problem-card animate-in delay-2">
+                            <div class="problem-icon">📦</div>
+                            <h3>The Challenge</h3>
+                            <p>LLMs can only "see" a <strong>limited amount of text</strong> at once — this is called
+                                the <em>context window</em>.</p>
+                            <div class="context-visual">
+                                <div class="context-bar">
+                                    <div class="context-filled" style="width: 30%">
+                                        <span>Your prompt</span>
+                                    </div>
+                                    <div class="context-available">
+                                        <span>Available space</span>
+                                    </div>
+                                </div>
+                                <div class="context-sizes">
+                                    <span>4K tokens</span>
+                                    <span>32K tokens</span>
+                                    <span>128K tokens</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="implications animate-in delay-3">
+                            <h4>This means:</h4>
+                            <ul>
+                                <li>❌ Can't read your entire codebase at once</li>
+                                <li>❌ Doesn't remember previous conversations</li>
+                                <li>❌ No access to real-time information</li>
+                                <li>❌ Can't access your private documents</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="split-right">
+                        <div class="solution-teaser animate-in delay-4">
+                            <h3>The Solutions</h3>
+                            <p>Two key innovations address these limitations:</p>
+
+                            <div class="solution-preview">
+                                <div class="solution-item">
+                                    <div class="solution-icon">📚</div>
+                                    <div class="solution-text">
+                                        <strong>RAG</strong>
+                                        <span>Retrieve relevant knowledge on-demand</span>
+                                    </div>
+                                </div>
+                                <div class="solution-item">
+                                    <div class="solution-icon">🤖</div>
+                                    <div class="solution-text">
+                                        <strong>Agents</strong>
+                                        <span>Take actions and use external tools</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="prompt-engineering animate-in delay-5">
+                            <h4>💡 Prompt Engineering</h4>
+                            <p>The art of crafting inputs to get optimal outputs. Techniques include:</p>
+                            <div class="technique-tags">
+                                <span class="technique">Few-shot learning</span>
+                                <span class="technique">Chain-of-thought</span>
+                                <span class="technique">System prompts</span>
+                                <span class="technique">Role-playing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: What is RAG? -->
+        <section class="slide" id="slide-4">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">03</span>
+                    <h2 class="slide-title animate-in">What is RAG?</h2>
+                    <p class="slide-subtitle animate-in delay-1">Retrieval-Augmented Generation</p>
+                </div>
+
+                <div class="rag-definition animate-in delay-2">
+                    <p class="definition-text">RAG connects LLMs to <strong>external knowledge sources</strong>,
+                        allowing them to access information beyond their training data — <em>in real-time</em>.</p>
+                </div>
+
+                <div class="rag-architecture animate-in delay-3">
+                    <div class="rag-flow">
+                        <div class="rag-step">
+                            <div class="step-number">1</div>
+                            <div class="step-icon">❓</div>
+                            <div class="step-content">
+                                <h4>Query</h4>
+                                <p>User asks a question</p>
+                            </div>
+                        </div>
+                        <div class="rag-arrow">→</div>
+                        <div class="rag-step">
+                            <div class="step-number">2</div>
+                            <div class="step-icon">🔢</div>
+                            <div class="step-content">
+                                <h4>Embed</h4>
+                                <p>Convert to vector</p>
+                            </div>
+                        </div>
+                        <div class="rag-arrow">→</div>
+                        <div class="rag-step">
+                            <div class="step-number">3</div>
+                            <div class="step-icon">🔍</div>
+                            <div class="step-content">
+                                <h4>Retrieve</h4>
+                                <p>Search vector DB</p>
+                            </div>
+                        </div>
+                        <div class="rag-arrow">→</div>
+                        <div class="rag-step">
+                            <div class="step-number">4</div>
+                            <div class="step-icon">📝</div>
+                            <div class="step-content">
+                                <h4>Augment</h4>
+                                <p>Add to context</p>
+                            </div>
+                        </div>
+                        <div class="rag-arrow">→</div>
+                        <div class="rag-step">
+                            <div class="step-number">5</div>
+                            <div class="step-icon">💬</div>
+                            <div class="step-content">
+                                <h4>Generate</h4>
+                                <p>LLM responds</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rag-details">
+                    <div class="detail-card animate-in delay-4">
+                        <h4>🔢 Embeddings</h4>
+                        <p>Text converted to <strong>numerical vectors</strong> that capture semantic meaning. Similar
+                            concepts have similar vectors.</p>
+                        <code class="vector-example">"cat" → [0.2, -0.5, 0.8, ...]</code>
+                    </div>
+
+                    <div class="detail-card animate-in delay-5">
+                        <h4>🗄️ Vector Database</h4>
+                        <p>Specialized database for storing and querying embeddings. Enables <strong>semantic
+                                search</strong> — finding by meaning, not just keywords.</p>
+                        <div class="db-examples">
+                            <span>Pinecone</span>
+                            <span>Weaviate</span>
+                            <span>Chroma</span>
+                            <span>pgvector</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-card animate-in delay-6">
+                        <h4>✨ Use Cases</h4>
+                        <ul class="use-cases">
+                            <li>Enterprise knowledge bases</li>
+                            <li>Documentation chatbots</li>
+                            <li>Customer support</li>
+                            <li>Research assistants</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="rag-vs-finetuning animate-in delay-7">
+                    <p><strong>💡 RAG vs Fine-tuning:</strong> RAG retrieves knowledge at runtime; fine-tuning bakes it
+                        into model weights. RAG is more flexible and doesn't require retraining.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: What is an Agent? -->
+        <section class="slide" id="slide-5">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">04</span>
+                    <h2 class="slide-title animate-in">What is an Agent?</h2>
+                    <p class="slide-subtitle animate-in delay-1">LLMs That Can Take Action</p>
+                </div>
+
+                <div class="agent-definition animate-in delay-2">
+                    <div class="agent-equation">
+                        <span class="eq-part">LLM</span>
+                        <span class="eq-operator">+</span>
+                        <span class="eq-part">Reasoning</span>
+                        <span class="eq-operator">+</span>
+                        <span class="eq-part">Tools</span>
+                        <span class="eq-operator">+</span>
+                        <span class="eq-part">Memory</span>
+                        <span class="eq-operator">=</span>
+                        <span class="eq-result">Agent</span>
+                    </div>
+                </div>
+
+                <div class="agent-components">
+                    <div class="component-card animate-in delay-3">
+                        <div class="component-icon">🎯</div>
+                        <h4>Goal-Directed</h4>
+                        <p>Works towards objectives, breaking complex tasks into steps</p>
+                    </div>
+                    <div class="component-card animate-in delay-4">
+                        <div class="component-icon">🔄</div>
+                        <h4>Reasoning Loop</h4>
+                        <p><strong>ReAct Pattern:</strong> Reason → Act → Observe → Repeat</p>
+                    </div>
+                    <div class="component-card animate-in delay-5">
+                        <div class="component-icon">🔧</div>
+                        <h4>Tool Use</h4>
+                        <p>Calls external APIs, executes code, browses the web</p>
+                    </div>
+                    <div class="component-card animate-in delay-6">
+                        <div class="component-icon">💾</div>
+                        <h4>Memory</h4>
+                        <p>Short-term (conversation) and long-term (persistent) memory</p>
+                    </div>
+                </div>
+
+                <div class="react-diagram animate-in delay-7">
+                    <h4>The ReAct Loop</h4>
+                    <div class="loop-visual">
+                        <div class="loop-step thought">
+                            <span class="step-label">Thought</span>
+                            <p>"I need to search for the latest data..."</p>
+                        </div>
+                        <div class="loop-arrow">↓</div>
+                        <div class="loop-step action">
+                            <span class="step-label">Action</span>
+                            <p>web_search("Q4 2024 sales data")</p>
+                        </div>
+                        <div class="loop-arrow">↓</div>
+                        <div class="loop-step observation">
+                            <span class="step-label">Observation</span>
+                            <p>"Found 3 relevant documents..."</p>
+                        </div>
+                        <div class="loop-arrow loop-back">↺</div>
+                    </div>
+                </div>
+
+                <div class="agent-examples animate-in delay-8">
+                    <span class="example-label">Real-world Agents:</span>
+                    <span class="example-tag">GitHub Copilot</span>
+                    <span class="example-tag">Devin</span>
+                    <span class="example-tag">AutoGPT</span>
+                    <span class="example-tag">Claude Computer Use</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: What is MCP? -->
+        <section class="slide" id="slide-6">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">05</span>
+                    <h2 class="slide-title animate-in">What is MCP?</h2>
+                    <p class="slide-subtitle animate-in delay-1">Model Context Protocol</p>
+                </div>
+
+                <div class="mcp-intro animate-in delay-2">
+                    <div class="mcp-tagline">
+                        <span class="highlight-text">The "USB-C" for AI</span>
+                    </div>
+                    <p class="mcp-description">MCP is an <strong>open standard</strong> that provides a universal way
+                        for AI models to connect with external tools, data sources, and services.</p>
+                </div>
+
+                <div class="mcp-problem-solution">
+                    <div class="before-after">
+                        <div class="before animate-in delay-3">
+                            <h4>❌ Before MCP</h4>
+                            <div class="chaos-diagram">
+                                <div class="chaos-center">AI App</div>
+                                <div class="chaos-connections">
+                                    <span class="chaos-line" style="--angle: 0deg">Custom API 1</span>
+                                    <span class="chaos-line" style="--angle: 60deg">Plugin 2</span>
+                                    <span class="chaos-line" style="--angle: 120deg">SDK 3</span>
+                                    <span class="chaos-line" style="--angle: 180deg">Webhook 4</span>
+                                    <span class="chaos-line" style="--angle: 240deg">Custom 5</span>
+                                    <span class="chaos-line" style="--angle: 300deg">API 6</span>
+                                </div>
+                            </div>
+                            <p>Every integration is custom-built</p>
+                        </div>
+
+                        <div class="after animate-in delay-4">
+                            <h4>✅ With MCP</h4>
+                            <div class="clean-diagram">
+                                <div class="mcp-layer">
+                                    <div class="mcp-hosts">
+                                        <span>Claude</span>
+                                        <span>IDEs</span>
+                                        <span>Apps</span>
+                                    </div>
+                                    <div class="mcp-protocol">MCP Protocol</div>
+                                    <div class="mcp-servers">
+                                        <span>Files</span>
+                                        <span>DBs</span>
+                                        <span>APIs</span>
+                                        <span>Tools</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>One standard, infinite connections</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mcp-architecture animate-in delay-5">
+                    <h4>MCP Architecture</h4>
+                    <div class="arch-diagram">
+                        <div class="arch-layer hosts">
+                            <span class="layer-label">Hosts</span>
+                            <div class="layer-items">
+                                <span>Claude Desktop</span>
+                                <span>VS Code</span>
+                                <span>Custom Apps</span>
+                            </div>
+                        </div>
+                        <div class="arch-arrow">↕</div>
+                        <div class="arch-layer clients">
+                            <span class="layer-label">MCP Clients</span>
+                            <p class="layer-desc">Maintain connections to servers</p>
+                        </div>
+                        <div class="arch-arrow">↕</div>
+                        <div class="arch-layer servers">
+                            <span class="layer-label">MCP Servers</span>
+                            <div class="layer-items">
+                                <span>🔧 Tools</span>
+                                <span>📄 Resources</span>
+                                <span>💬 Prompts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mcp-capabilities animate-in delay-6">
+                    <div class="capability">
+                        <strong>Tools:</strong> Functions the AI can call (e.g., run SQL, send email)
+                    </div>
+                    <div class="capability">
+                        <strong>Resources:</strong> Data the AI can read (e.g., files, DB records)
+                    </div>
+                    <div class="capability">
+                        <strong>Prompts:</strong> Pre-defined templates for common tasks
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Connecting the Concepts -->
+        <section class="slide" id="slide-7">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">06</span>
+                    <h2 class="slide-title animate-in">Putting It All Together</h2>
+                    <p class="slide-subtitle animate-in delay-1">The Complete AI Architecture</p>
+                </div>
+
+                <div class="complete-architecture animate-in delay-2">
+                    <div class="arch-visual">
+                        <div class="arch-row user-row">
+                            <div class="arch-box user">
+                                <span class="box-icon">👤</span>
+                                <span class="box-label">User</span>
+                            </div>
+                        </div>
+                        <div class="arch-connector">↓</div>
+                        <div class="arch-row agent-row">
+                            <div class="arch-box agent">
+                                <span class="box-icon">🤖</span>
+                                <span class="box-label">Agent</span>
+                                <span class="box-desc">Orchestrates the flow</span>
+                            </div>
+                        </div>
+                        <div class="arch-connector triple">
+                            <span>↙</span>
+                            <span>↓</span>
+                            <span>↘</span>
+                        </div>
+                        <div class="arch-row components-row">
+                            <div class="arch-box llm">
+                                <span class="box-icon">🧠</span>
+                                <span class="box-label">LLM</span>
+                                <span class="box-desc">The brain</span>
+                            </div>
+                            <div class="arch-box rag">
+                                <span class="box-icon">📚</span>
+                                <span class="box-label">RAG</span>
+                                <span class="box-desc">The memory</span>
+                            </div>
+                            <div class="mcp-column">
+                                <div class="arch-box mcp">
+                                    <span class="box-icon">🔌</span>
+                                    <span class="box-label">MCP</span>
+                                    <span class="box-desc">The interface</span>
+                                </div>
+                                <div class="mcp-connector">↓</div>
+                                <div class="external-services">
+                                    <span class="service">Databases</span>
+                                    <span class="service">APIs</span>
+                                    <span class="service">Files</span>
+                                    <span class="service">Services</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analogy-cards">
+                    <div class="analogy-card animate-in delay-3">
+                        <div class="analogy-icon">🧠</div>
+                        <h4>LLM = Brain</h4>
+                        <p>Understands language, reasons, and generates responses</p>
+                    </div>
+                    <div class="analogy-card animate-in delay-4">
+                        <div class="analogy-icon">📚</div>
+                        <h4>RAG = Memory</h4>
+                        <p>Retrieves relevant knowledge when needed</p>
+                    </div>
+                    <div class="analogy-card animate-in delay-5">
+                        <div class="analogy-icon">🤖</div>
+                        <h4>Agent = Executive</h4>
+                        <p>Plans, decides, and coordinates actions</p>
+                    </div>
+                    <div class="analogy-card animate-in delay-6">
+                        <div class="analogy-icon">🔌</div>
+                        <h4>MCP = Nervous System</h4>
+                        <p>Standard protocol connecting everything</p>
+                    </div>
+                </div>
+
+                <div class="example-flow animate-in delay-7">
+                    <h4>Example: "Analyze last quarter's sales and create a report"</h4>
+                    <div class="flow-steps">
+                        <div class="flow-step">
+                            <span class="step-num">1</span>
+                            <p><strong>Agent</strong> receives request and plans steps</p>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-num">2</span>
+                            <p><strong>MCP</strong> connects to sales database</p>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-num">3</span>
+                            <p><strong>RAG</strong> retrieves product documentation</p>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-num">4</span>
+                            <p><strong>LLM</strong> analyzes and generates report</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Future & Summary -->
+        <section class="slide" id="slide-8">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">07</span>
+                    <h2 class="slide-title animate-in">What's Next?</h2>
+                    <p class="slide-subtitle animate-in delay-1">The Future of AI Systems</p>
+                </div>
+
+                <div class="future-trends">
+                    <div class="trend-card animate-in delay-2">
+                        <div class="trend-icon">🌐</div>
+                        <h4>Multi-Agent Systems</h4>
+                        <p>Teams of specialized agents collaborating on complex tasks — researcher, coder, reviewer,
+                            tester working together.</p>
+                    </div>
+                    <div class="trend-card animate-in delay-3">
+                        <div class="trend-icon">🧩</div>
+                        <h4>Improved Reasoning</h4>
+                        <p>Chain-of-thought, tree-of-thought, and new architectures that enable deeper logical
+                            reasoning.</p>
+                    </div>
+                    <div class="trend-card animate-in delay-4">
+                        <div class="trend-icon">🔗</div>
+                        <h4>Seamless Integration</h4>
+                        <p>MCP and similar standards making AI integration as simple as installing an app.</p>
+                    </div>
+                    <div class="trend-card animate-in delay-5">
+                        <div class="trend-icon">🏠</div>
+                        <h4>Local & Private AI</h4>
+                        <p>Smaller, efficient models running locally with full data privacy.</p>
+                    </div>
+                </div>
+
+                <div class="summary-section animate-in delay-6">
+                    <h3>Key Takeaways</h3>
+                    <div class="takeaways">
+                        <div class="takeaway">
+                            <span class="takeaway-icon">1</span>
+                            <p><strong>LLMs</strong> are the foundation — they understand and generate language</p>
+                        </div>
+                        <div class="takeaway">
+                            <span class="takeaway-icon">2</span>
+                            <p><strong>RAG</strong> extends knowledge beyond training data</p>
+                        </div>
+                        <div class="takeaway">
+                            <span class="takeaway-icon">3</span>
+                            <p><strong>Agents</strong> add reasoning, planning, and action capabilities</p>
+                        </div>
+                        <div class="takeaway">
+                            <span class="takeaway-icon">4</span>
+                            <p><strong>MCP</strong> standardizes how AI connects to the world</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resources animate-in delay-7">
+                    <h4>Learn More</h4>
+                    <div class="resource-links">
+                        <a href="https://modelcontextprotocol.io" target="_blank" class="resource-link">MCP
+                            Documentation</a>
+                        <a href="https://arxiv.org/abs/2210.03629" target="_blank" class="resource-link">ReAct Paper</a>
+                        <a href="https://arxiv.org/abs/2005.11401" target="_blank" class="resource-link">RAG Paper</a>
+                        <a href="https://arxiv.org/abs/1706.03762" target="_blank" class="resource-link">Attention
+                            Paper</a>
+                    </div>
+                </div>
+
+                <div class="closing animate-in delay-8">
+                    <p class="thank-you">Thank You!</p>
+                    <p class="questions">Questions?</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Author Footer -->
+    <div class="author-footer">Amirdha Gopal Rajendran</div>
+
+    <!-- Demo Link -->
+    <a href="/static/index.html" class="demo-link" title="Try Interactive Demo">🧪 Demo</a>
+
+    <!-- Hover Zone for Navigation -->
+    <div class="nav-hover-zone"></div>
+
+    <!-- Navigation Controls -->
+    <nav class="nav-controls">
+        <button class="nav-btn" id="prevBtn" aria-label="Previous slide">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <button class="nav-btn" id="nextBtn" aria-label="Next slide">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Keyboard Hints -->
+    <div class="keyboard-hints">
+        <span><kbd>←</kbd> <kbd>→</kbd> Navigate</span>
+        <span><kbd>Space</kbd> Next</span>
+        <span><kbd>Home</kbd> <kbd>End</kbd> Jump</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

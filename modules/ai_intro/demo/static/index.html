@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Concepts Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🤖</span>
+                <h1>AI Concepts Demo</h1>
+            </div>
+            <div class="header-right">
+                <button class="btn-icon-only" id="settings-btn" title="Settings">
+                    ⚙️
+                </button>
+                <div class="status" id="status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tabs">
+            <button class="tab active" data-tab="llm">
+                <span class="tab-icon">🧠</span>
+                <span class="tab-label">LLM</span>
+            </button>
+            <button class="tab" data-tab="embeddings">
+                <span class="tab-icon">🔢</span>
+                <span class="tab-label">Embeddings</span>
+            </button>
+            <button class="tab" data-tab="rag">
+                <span class="tab-icon">📚</span>
+                <span class="tab-label">RAG</span>
+            </button>
+            <button class="tab" data-tab="agent">
+                <span class="tab-icon">🤖</span>
+                <span class="tab-label">Agent</span>
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- LLM Tab -->
+            <section class="panel active" id="panel-llm">
+                <div class="panel-header">
+                    <h2>Large Language Model</h2>
+                    <p>Generate text with streaming output. Adjust temperature for creativity.</p>
+                </div>
+                <div class="input-group">
+                    <label for="llm-prompt">Prompt</label>
+                    <textarea id="llm-prompt" rows="3"
+                        placeholder="Enter your prompt here...">Explain quantum computing in simple terms.</textarea>
+                </div>
+                <div class="input-row">
+                    <div class="input-group slider-group">
+                        <label for="llm-temp">Temperature: <span id="llm-temp-value">0.7</span></label>
+                        <input type="range" id="llm-temp" min="0" max="2" step="0.1" value="0.7">
+                    </div>
+                    <button class="btn primary" id="llm-generate">
+                        <span class="btn-icon">▶</span> Generate
+                    </button>
+                </div>
+                <div class="output-area">
+                    <div class="output-header">
+                        <span>Output</span>
+                        <div class="output-controls">
+                            <button class="btn-toggle" id="llm-preview-toggle" title="Toggle Markdown Preview">
+                                <span class="toggle-icon">📝</span> Preview
+                            </button>
+                            <button class="btn-small" id="llm-clear">Clear</button>
+                        </div>
+                    </div>
+                    <div class="output" id="llm-output"></div>
+                    <div class="output markdown-preview hidden" id="llm-preview"></div>
+                </div>
+            </section>
+
+            <!-- Embeddings Tab -->
+            <section class="panel" id="panel-embeddings">
+                <div class="panel-header">
+                    <h2>Text Embeddings</h2>
+                    <p>Compare semantic similarity between texts or search documents.</p>
+                </div>
+
+                <div class="sub-tabs">
+                    <button class="sub-tab active" data-subtab="compare">Compare Texts</button>
+                    <button class="sub-tab" data-subtab="search">Semantic Search</button>
+                </div>
+
+                <!-- Compare Sub-panel -->
+                <div class="sub-panel active" id="subpanel-compare">
+                    <div class="input-row two-col">
+                        <div class="input-group">
+                            <label for="embed-text1">Text 1</label>
+                            <textarea id="embed-text1" rows="2"
+                                placeholder="First text...">I love programming</textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="embed-text2">Text 2</label>
+                            <textarea id="embed-text2" rows="2"
+                                placeholder="Second text...">Coding is my passion</textarea>
+                        </div>
+                    </div>
+                    <button class="btn primary" id="embed-compare">
+                        <span class="btn-icon">⚖️</span> Compare
+                    </button>
+                    <div class="output-area">
+                        <div class="output" id="embed-compare-output"></div>
+                    </div>
+                </div>
+
+                <!-- Search Sub-panel -->
+                <div class="sub-panel" id="subpanel-search">
+                    <div class="input-group">
+                        <label for="embed-query">Search Query</label>
+                        <input type="text" id="embed-query" placeholder="How do computers learn?">
+                    </div>
+                    <button class="btn primary" id="embed-search">
+                        <span class="btn-icon">🔍</span> Search
+                    </button>
+                    <div class="output-area">
+                        <div class="output" id="embed-search-output"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RAG Tab -->
+            <section class="panel" id="panel-rag">
+                <div class="panel-header">
+                    <h2>Retrieval-Augmented Generation</h2>
+                    <p>Ask questions about AI concepts. The system retrieves relevant context before answering.</p>
+                </div>
+                <div class="input-group">
+                    <label for="rag-question">Question</label>
+                    <input type="text" id="rag-question" placeholder="What is the ReAct pattern?">
+                </div>
+                <button class="btn primary" id="rag-ask">
+                    <span class="btn-icon">❓</span> Ask
+                </button>
+                <div class="output-area">
+                    <div class="output-header">
+                        <span>Process & Answer</span>
+                        <button class="btn-small" id="rag-clear">Clear</button>
+                    </div>
+                    <div class="output rag-output" id="rag-output"></div>
+                </div>
+            </section>
+
+            <!-- Agent Tab -->
+            <section class="panel" id="panel-agent">
+                <div class="panel-header">
+                    <h2>AI Agent</h2>
+                    <p>Watch an agent reason and use tools to answer your question (ReAct pattern).</p>
+                </div>
+                <div class="tools-info">
+                    <span class="tool-badge">🧮 Calculator</span>
+                    <span class="tool-badge">🕐 Time</span>
+                    <span class="tool-badge">🔍 Web Search</span>
+                </div>
+                <div class="input-group">
+                    <label for="agent-query">Query</label>
+                    <input type="text" id="agent-query" placeholder="What is the square root of 144 plus 25?">
+                </div>
+                <button class="btn primary" id="agent-run">
+                    <span class="btn-icon">🚀</span> Run Agent
+                </button>
+                <div class="output-area">
+                    <div class="output-header">
+                        <span>Agent Steps</span>
+                        <button class="btn-small" id="agent-clear">Clear</button>
+                    </div>
+                    <div class="output agent-output" id="agent-output"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <a href="/slides/index.html" class="footer-link">📊 View Slides</a>
+            <span class="separator">•</span>
+            <span>Powered by Ollama</span>
+            <span class="separator">•</span>
+            <span>qwen3:8b + nomic-embed-text</span>
+        </footer>
+    </div>
+
+    <div class="author-footer">Amirdha Gopal Rajendran</div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay hidden" id="settings-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>⚙️ Settings</h3>
+                <button class="btn-close" id="settings-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="llm-model-select">LLM Model</label>
+                    <select id="llm-model-select" class="select-input">
+                        <option value="">Loading...</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="embed-model-select">Embedding Model</label>
+                    <select id="embed-model-select" class="select-input">
+                        <option value="">Loading...</option>
+                    </select>
+                </div>
+                <div class="current-config" id="current-config"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="settings-reset">Reset to Defaults</button>
+                <button class="btn primary" id="settings-save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
