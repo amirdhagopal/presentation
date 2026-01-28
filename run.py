@@ -29,11 +29,11 @@ def create_app(module_name: str) -> FastAPI:
         app.mount("/slides", StaticFiles(directory=slides_path), name="slides")
         print(f"Mounted slides from: {slides_path}")
 
-    # 2. Mount Demo Static Files (if exists)
-    demo_static_path = base_path / "demo" / "static"
-    if demo_static_path.exists():
-        app.mount("/demo/static", StaticFiles(directory=demo_static_path), name="demo_static")
-        print(f"Mounted demo static from: {demo_static_path}")
+    # 2. Mount Demo Directory (matches GitHub Pages structure)
+    demo_path = base_path / "demo"
+    if demo_path.exists():
+        app.mount("/demo", StaticFiles(directory=demo_path), name="demo")
+        print(f"Mounted demo from: {demo_path}")
 
     # 3. Include Demo API Router (if api.py exists)
     api_module_path = f"modules.{module_name}.demo.api"
@@ -53,7 +53,7 @@ def create_app(module_name: str) -> FastAPI:
     print("="*50)
     if slides_path.exists():
         print(f"📝 Slides: http://localhost:8001/slides/index.html")
-    if demo_static_path.exists():
+    if demo_path.exists():
         print(f"🎮 Demo:   http://localhost:8001/demo/static/index.html")
     print(f"🔌 API:    http://localhost:8001/docs")
     print("="*50 + "\n")
