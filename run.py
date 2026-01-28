@@ -32,7 +32,7 @@ def create_app(module_name: str) -> FastAPI:
     # 2. Mount Demo Static Files (if exists)
     demo_static_path = base_path / "demo" / "static"
     if demo_static_path.exists():
-        app.mount("/static", StaticFiles(directory=demo_static_path), name="static")
+        app.mount("/demo/static", StaticFiles(directory=demo_static_path), name="demo_static")
         print(f"Mounted demo static from: {demo_static_path}")
 
     # 3. Include Demo API Router (if api.py exists)
@@ -54,7 +54,7 @@ def create_app(module_name: str) -> FastAPI:
     if slides_path.exists():
         print(f"📝 Slides: http://localhost:8001/slides/index.html")
     if demo_static_path.exists():
-        print(f"🎮 Demo:   http://localhost:8001/demo")
+        print(f"🎮 Demo:   http://localhost:8001/demo/static/index.html")
     print(f"🔌 API:    http://localhost:8001/docs")
     print("="*50 + "\n")
 
@@ -68,7 +68,7 @@ def create_app(module_name: str) -> FastAPI:
     # 5. Demo Redirect (convenience)
     @app.get("/demo")
     async def demo_redirect():
-        return RedirectResponse(url="/static/index.html")
+        return RedirectResponse(url="/demo/static/index.html")
 
     return app
 
