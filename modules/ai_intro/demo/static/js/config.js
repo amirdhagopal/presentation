@@ -12,7 +12,7 @@ let apiBase = `http://localhost:${BACKEND_PORT}`;
 // If we are running locally (localhost or file), we might want to use the current protocol/host
 // But usually, the backend is always HTTP localhost:8001 unless we are proxying.
 // If served from the backend (localhost:8001), use relative path or same origin.
-if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '0.0.0.0') {
     // If we are on the backend port, use same origin
     if (window.location.port === BACKEND_PORT) {
         apiBase = `${window.location.protocol}//${window.location.hostname}:${BACKEND_PORT}`;

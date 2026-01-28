@@ -23,6 +23,16 @@ def create_app(module_name: str) -> FastAPI:
 
     app = FastAPI(title=f"{module_name.capitalize()} Presentation")
 
+    # Add CORS Middleware to allow requests from any origin (e.g. 0.0.0.0 or GitHub Pages)
+    from fastapi.middleware.cors import CORSMiddleware
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
     # 1. Mount Slides (if exists)
     slides_path = base_path / "slides"
     if slides_path.exists():
