@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: #8892b0;
+            font-size: 1.2rem;
+            margin-bottom: 60px;
+        }
+        
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        .module-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #e94560;
+            box-shadow: 0 20px 40px rgba(233, 69, 96, 0.2);
+        }
+        
+        .module-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .module-card p {
+            color: #8892b0;
+            line-height: 1.6;
+        }
+        
+        .module-card .arrow {
+            display: inline-block;
+            margin-top: 20px;
+            color: #e94560;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .module-card:hover .arrow {
+            transform: translateX(10px);
+        }
+        
+        footer {
+            margin-top: auto;
+            padding-top: 60px;
+            color: #8892b0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Presentations</h1>
+    <p class="subtitle">Technical talks and demos</p>
+    
+    <div class="modules">
+        <a href="modules/ai_intro/slides/" class="module-card">
+            <h2>🤖 AI Introduction</h2>
+            <p>Understanding LLMs, embeddings, RAG, and AI agents with hands-on Ollama demos.</p>
+            <span class="arrow">→</span>
+        </a>
+        
+        <!-- Add more modules here as you create them -->
+        <!--
+        <a href="modules/next_module/slides/" class="module-card">
+            <h2>📦 Next Module</h2>
+            <p>Description of the next module...</p>
+            <span class="arrow">→</span>
+        </a>
+        -->
+    </div>
+    
+    <footer>
+        © 2026 Amirdha Gopal Rajendran
+    </footer>
+</body>
+</html>
