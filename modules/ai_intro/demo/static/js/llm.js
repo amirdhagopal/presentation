@@ -32,7 +32,7 @@ function initLLM() {
             outputEl.classList.add('hidden');
             previewEl.classList.remove('hidden');
             if (rawContent) {
-                previewEl.innerHTML = marked.parse(rawContent);
+                previewEl.innerHTML = marked.parse(rawContent, { breaks: true });
             }
         } else {
             // Show raw output
@@ -57,13 +57,13 @@ function initLLM() {
                 onComplete: (text) => {
                     rawContent = text;
                     if (isPreviewMode) {
-                        previewEl.innerHTML = marked.parse(rawContent);
+                        previewEl.innerHTML = marked.parse(rawContent, { breaks: true });
                     }
                 }
             });
             rawContent = outputEl.textContent;
             if (isPreviewMode) {
-                previewEl.innerHTML = marked.parse(rawContent);
+                previewEl.innerHTML = marked.parse(rawContent, { breaks: true });
             }
         } catch (error) {
             console.error('Generation failed:', error);
