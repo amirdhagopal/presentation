@@ -34,7 +34,17 @@ async function checkHealth() {
         status.classList.remove('connected');
         status.querySelector('.status-text').textContent = 'Disconnected';
         console.error('Health check failed:', error);
-        if (banner) banner.classList.remove('hidden');
+
+        if (banner) {
+            const isLocal = ['localhost', '127.0.0.1', '0.0.0.0'].includes(window.location.hostname);
+            if (!isLocal) {
+                const bannerText = banner.querySelector('.banner-text');
+                if (bannerText) {
+                    bannerText.innerHTML = '<strong>Connection Failed!</strong><br>Demo only works in local system with Ollama.';
+                }
+            }
+            banner.classList.remove('hidden');
+        }
     }
 }
 
